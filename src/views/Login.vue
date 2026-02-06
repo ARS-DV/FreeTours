@@ -1,34 +1,40 @@
 <script setup>
 import {ref} from "vue"
 import router from "@/router";
+import {rutaApi} from "@/main";
 
 const emit = defineEmits(["sesionIniciada"]);
 const form = ref({ usuario: '', password: '' });
 const error = ref('');
 
 async function iniciarSesion() {
-  try {
-    const response = await fetch('/usuarios.json'); 
-    const usuarios = await response.json();
 
-    const usuarioEncontrado = usuarios.find(
+  const usuarioEncontrado = usuarios.find(
       (u) => u.usuario === form.value.usuario && u.password === form.value.password
     );
+   const loginData = {
+    email: ,
+    contraseña: 
+};
 
-    if (usuarioEncontrado) {
-      //TODO: HABRÍA QUE NOTIFICAR A APP.VUE CON UN EMIT PARA QUE SEPA QUE LA SESIÓN ESTÁ INICIADA
-      emit("sesionIniciada",{usuario: usuarioEncontrado.usuario, rol:usuarioEncontrado.rol});
-      error.value = '';
-      router.push({name:"home"});
-
-      
+fetch(rutaApi+'usuarios.php', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(loginData)
+})
+.then(response => response.json())
+.then(data => {
+    if (data.status === 'success') {
+        console.log('Login exitoso:', data.user);
     } else {
-      error.value = 'Usuario o contraseña incorrectos';
+        console.log('Error de login:', data.message);
     }
-  } catch (err) {
-    error.value = 'Error al cargar los datos';
-  }
+})
+
 }
+  
 </script>
 <template>
     <form> 

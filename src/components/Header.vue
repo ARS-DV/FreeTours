@@ -1,6 +1,7 @@
 <script setup>
 import router from "@/router";
 import {ref} from "vue"
+import {rutaApi} from "@/main"
 
 const emit = defineEmits(["sesionCerrada"]);
 
@@ -13,13 +14,8 @@ const props= defineProps({
 
 
 function cerrarSesion() {
-  
-  
   emit("sesionCerrada");
   router.push({name:"home"});
-
-
-
 }
 </script>
 

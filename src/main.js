@@ -2,5 +2,6 @@ import './assets/main.css'
 
 import { createApp } from 'vue'
 import App from './App.vue'
-
+import router from './router'
+export const rutaApi = "http://localhost:8003/api.php/"
 createApp(App).mount('#app')
