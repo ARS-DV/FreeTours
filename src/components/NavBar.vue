@@ -4,28 +4,20 @@ const props = defineProps({
     datos: Object,
 });
 
-
-
-
 </script>
 
 <template>
-    <nav class="navbar navbar-expand navbar-light bg-light">
+    <nav class="navbar">
         
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
+        <div class="navbar-collapse">
+            <ul>
                 <li class="nav-item">
-                    <RouterLink to="/">Index</RouterLink>
+                    <RouterLink to="#">Rutas</RouterLink>
                 </li>
-               <li v-if="datos == null" class="nav-item">
-                <RouterLink to="/login">Login</RouterLink>
+               <li class="nav-item">
+                <RouterLink to="#">Reservas</RouterLink>
                </li>
-                    
-                <li v-else class="nav-item">
-                    <RouterLink :to="`/micuenta/${datos.usuario}`">Mi cuenta</RouterLink>
-
-                </li>
                
 
             </ul>

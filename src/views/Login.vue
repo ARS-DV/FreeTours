@@ -3,18 +3,17 @@ import {ref} from "vue"
 import router from "@/router";
 import {rutaApi} from "@/main";
 
+
+//emit para dar aviso de la sesion Inciada
 const emit = defineEmits(["sesionIniciada"]);
+//variables para formulario y errores
 const form = ref({ usuario: '', password: '' });
 const error = ref('');
 
 async function iniciarSesion() {
-
-  const usuarioEncontrado = usuarios.find(
-      (u) => u.usuario === form.value.usuario && u.password === form.value.password
-    );
    const loginData = {
-    email: ,
-    contraseña: 
+    email: form.value.usuario,
+    contraseña: form.value.password,
 };
 
 fetch(rutaApi+'usuarios.php', {
@@ -28,6 +27,8 @@ fetch(rutaApi+'usuarios.php', {
 .then(data => {
     if (data.status === 'success') {
         console.log('Login exitoso:', data.user);
+        emit('sesionIniciada',data.user)
+        router.push("/")
     } else {
         console.log('Error de login:', data.message);
     }
@@ -37,12 +38,13 @@ fetch(rutaApi+'usuarios.php', {
   
 </script>
 <template>
+    <!--Formulario para iniciar la sesion-->
     <form> 
-        <label>Nombre</label>
+        <label>Email</label>
         <input v-model="form.usuario" type="text" />
-        <label>Contraseña</label>
+        <label>Password</label>
         <input v-model="form.password"  type="password" />
-        <p v-if="error" class="text-danger mt-2">{{ error }}</p>
-        <button @click.prevent="iniciarSesion">Iniciar sesión</button> 
+        <p v-if="error">{{ error }}</p>
+        <button @click.prevent="iniciarSesion">Login</button> 
     </form>
 </template>

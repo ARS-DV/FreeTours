@@ -1,16 +1,14 @@
 <script setup>
 import router from "@/router";
-import {ref} from "vue"
-import {rutaApi} from "@/main"
+import NavBar from './NavBar.vue';
 
-const emit = defineEmits(["sesionCerrada"]);
+
 
 const props= defineProps({
-  title: String,
-  usuarioAutenticado: Object
+  usuario:Object
 });
 
-
+const emit = defineEmits(["sesionCerrada"]);
 
 
 function cerrarSesion() {
@@ -22,20 +20,32 @@ function cerrarSesion() {
 
 <template>
     <header class="bg-dark text-white  p-3">
-      <div class="row">
-        <h1 class="col-8">{{ title }}</h1>
-        <div class="col-4">
-        
-        <div v-if="usuarioAutenticado" class="container text-end">
-          <span>Bienvenido, {{ usuarioAutenticado.usuario }} ({{ usuarioAutenticado.rol }})</span>
-          <button @click.prevent="cerrarSesion" class="btn btn-danger">Cerrar Sesión</button>
-        </div>
+      <div>
+          <h2>FreeTour</h2>
       </div>
+      <div>
+        <NavBar/>
+            <div>
+                <div v-if="usuario">
+                  <p>{{ usuario.name }}</p>
+                  <button @click="cerrarSesion">Logout</button>
+                </div>
+                <div v-else>
+                <button>
+                  <RouterLink to="login">Login</RouterLink>
+                </button>
+                <button>
+                  <RouterLink to="registro">Register</RouterLink>
+                </button>
+                </div>
+            </div>
       </div>
   </header>
 </template>
   
  
 <style scoped>
-
+*{
+  background-color: bisque;
+}
 </style>

@@ -1,6 +1,6 @@
 <template>
     <footer class="footer">
-      <p>&copy; {{ new Date().getFullYear() }} - Todos los derechos reservados.</p>
+      <p>&copy;FreeTour {{ new Date().getFullYear() }} - Todos los derechos reservados.</p>
     </footer>
   </template>
   

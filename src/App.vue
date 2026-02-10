@@ -1,9 +1,6 @@
 <script setup>
-import Content from './components/Content.vue';
-import Card from './components/Card.vue';
 import Header from './components/Header.vue';
 import Footer from './components/Footer.vue';
-import NavBar from './components/NavBar.vue';
 import router from "@/router";
 
 
@@ -19,22 +16,16 @@ function actualizaDatosSesion(usuario){
   if(usuario ){
     localStorage.setItem("sesion", JSON.stringify(usuario));
   }
-    
-
   else
     localStorage.removeItem("sesion");
 
 }
-
-
 </script>
 
 <template>
   <div class="layout">
 
-    <Header :usuarioAutenticado="datosSesion" @sesionCerrada="actualizaDatosSesion" title="Aplicacion Juana" />
-    <NavBar :datos="datosSesion"/>
-    <RouterView @sesionIniciada="actualizaDatosSesion" ></RouterView>
+    <Header :usuarioAutenticado="datosSesion" @sesionCerrada="actualizaDatosSesion" />
    
 
     <Footer/>
