@@ -1,50 +1,44 @@
-
-import { createRouter, createWebHistory } from "vue-router";
-import HomeAdmin from "../AdministradorViews/HomeAdmin.vue";
-import Rutas from "../AdministradorViews/Rutas.vue";
-import Usuarios from "../AdministradorViews/Usuarios.vue";
-import Footer from "../components/Footer.vue";
-import NavBar from "../components/NavBar.vue";
-import HomeGuia from "../GuiaViews/HomeGuia.vue";
-import CiudadView from "../RutasView/CiudadView.vue";
-import Home from "../views/Home.vue";
-import Login from "../views/Login.vue";
-import Registro from "../views/Registro.vue";
-import Reservas from "../views/Reservas.vue";
+import { createRouter, createWebHistory } from 'vue-router'
+import Login from '@/views/Login.vue'
+import Registro from '@/views/Registro.vue'
+import HomeAdmin from '@/views/HomeAdmin.vue'
+import Usuarios from '@/views/Usuarios.vue'
+import RutasAdmin from '@/views/Usuarios.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    {
-      path: "",
-      name: "footer",
-      component: Footer,
-    },
-    {
-      path: "/",
-      name: "navbar",
-      component: NavBar,
-    },
-    {
-      path: "/",
-      name: "home",
-      component: Home,
-    },
-    {
-      path: "/login",
-      name: "login",
+    
+     {
+      path: '/login',
+      name: 'login',
       component: Login,
     },
-    {
-      path: "/registro",
-      name: "registro",
+     {
+      path: '/registro',
+      name: 'registro',
       component: Registro,
     },
+    {
+      path: '/homeadmin',
+      name: 'homeadmin',
+      component: HomeAdmin,
+    },
+    {
+      path: '/usuarios',
+      name: 'usuarios',
+      component: Usuarios,
+    },
+    {
+      path: '/rutasAdmin',
+      name: 'rutasAdmin',
+      component: RutasAdmin,
+    },
   ],
-});
+})
 
-export default router;
+export default router
 
 // route level code-splitting
-// this generates a separate chunk (About.[hash].js) for this route
-// which is lazy-loaded when the route is visited.
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
