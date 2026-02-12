@@ -3,7 +3,7 @@ import Login from '@/views/Login.vue'
 import Registro from '@/views/Registro.vue'
 import HomeAdmin from '@/views/HomeAdmin.vue'
 import Usuarios from '@/views/Usuarios.vue'
-import RutasAdmin from '@/views/Usuarios.vue'
+import RutasAdmin from '@/views/RutasAdmin.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -30,8 +30,8 @@ const router = createRouter({
       component: Usuarios,
     },
     {
-      path: '/rutasAdmin',
-      name: 'rutasAdmin',
+      path: '/rutasadmin',
+      name: 'rutasadmin',
       component: RutasAdmin,
     },
   ],

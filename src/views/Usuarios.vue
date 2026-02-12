@@ -3,17 +3,31 @@ import { ref } from "vue";
 import router from "@/router";
 import { rutaApi } from "@/main";
 const arrayUsuarios = ref([]);
+const idUsuarioEditado = ref(null);
 
 
-async function eliminarUsuario() {
-
+async function eliminarUsuario(id) {
+fetch(rutaApi+'usuarios?id='+id, {
+    method: 'DELETE',
+    
+})
+.then(response => response.json())
+.then(data => {console.log('Respuesta:', data)
+listarUsuarios()
+})
+.catch(error => console.error('Error:', error));
 }
 
-async function editarUsuario(id,rol) {
+
+function editarUsuario(id) {
+  idUsuarioEditado.value = id;
+  
+}
+
+async function guardarEdicion(id,rol) {
 const updatedRole = {
     rol: rol
 };
-
 fetch(rutaApi+'usuarios?id='+id, {
     method: 'PUT',
     headers: {
@@ -24,10 +38,14 @@ fetch(rutaApi+'usuarios?id='+id, {
 .then(response => response.json())
 .then(data => {
   
-  console.log('Respuesta:', data)})
+  console.log('Respuesta:', data)
+  idUsuarioEditado.value = null;
+  listarUsuarios();
   
-.catch(error => console.error('Error:', error));
+}).catch(error => console.error('Error:', error));
 }
+
+
 
 async function listarUsuarios() {
   fetch(rutaApi + "usuarios", {
@@ -60,15 +78,18 @@ listarUsuarios();
         <td>{{ usuario.nombre }}</td>
         <td>{{ usuario.email }}</td>
         <td>{{ usuario.contraseña }}</td>
-        <td v-if="!editarUsuario">{{ usuario.rol }}</td>
-        <input v-else="editarUsuario" v-model="usuario.rol" ></input>
-        <td v-if="!editarUsuario">
-          <button @click.prevent="editarUsuario">Editar</button
-          ><button @click.prevent="eliminarUsuario">Eliminar</button>
+        <td v-if="idUsuarioEditado !== usuario.id">{{ usuario.rol }}</td>
+        <td v-else>
+          <input v-model="usuario.rol" class="form-control"></input>
         </td>
-        <td v-else="editarUsuario">
-          <button @click.prevent="editarUsuario(usuario.id,usuario.rol)">Guardar</button
-          ><button @click.prevent="eliminarUsuario">Eliminar</button>
+
+        <td v-if="idUsuarioEditado !== usuario.id">
+          <button @click.prevent="editarUsuario(usuario.id)">Editar</button>
+          <button @click.prevent="eliminarUsuario(usuario.id)">Eliminar</button>
+        </td>
+        <td v-else>
+          <button @click.prevent="guardarEdicion(usuario.id, usuario.rol)">Guardar</button>
+          <button @click.prevent="eliminarUsuario(usuario.id)">Eliminar</button>
         </td>
       </tr>
     </tbody>
