@@ -1,0 +1,4 @@
+Azul Turquesa	#00A8B5 .btn-info o .bg-info	Botones de información y navegación.
+Naranja Atardecer	#FF8C42 btn-warning o .bg-warning	Botones de "Reserva" y CTAs llamativos.
+Gris Piedra	#D1D8E0	.bg-light o .text-secondary	Fondos de tarjetas y textos secundarios.
+Negro Carbón	#1E272E	.bg-dark o .text-dark	Títulos, Header y Footer.

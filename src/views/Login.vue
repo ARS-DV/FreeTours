@@ -10,6 +10,16 @@ const form = ref({ usuario: '', password: '' });
 const error = ref('');
 //funcion para que agarre los valores del formulario
 async function iniciarSesion() {
+    //avisamos que los campos no esten vacios
+    if (!form.value.usuario || !form.value.password) {
+       error.value = "Debe rellenar todos los campos";
+       return;
+   }
+   // avisamos que el gmail tenga un @
+   if (!form.value.usuario.includes('@')) {
+       error.value = "Su correo electrónico no es válido";
+       return;
+   }
    const loginData = {
     email: form.value.usuario,
     contraseña: form.value.password,
@@ -25,6 +35,7 @@ fetch(rutaApi+'usuarios?login', {
 })
 .then(response => response.json())
 .then(data => {
+
     if (data.status === 'success') {
         emit('sesionIniciada', data.user);
         console.log('Login exitoso:', data.user);
@@ -34,6 +45,7 @@ fetch(rutaApi+'usuarios?login', {
         router.push('/')
         }
     } else {
+        error.value="Usuario no encontrado"
         console.log('Error de login:', data.message);
     }
 })

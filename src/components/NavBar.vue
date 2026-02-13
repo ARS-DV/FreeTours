@@ -49,6 +49,19 @@ function enviarLogout() {
               </button>
         </div>
 
+        <div v-else-if="datos.rol == 'guia'">
+          <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <RouterLink to="/homeguia">Rutas Asignadas</RouterLink>
+        </li>
+        
+      </ul>
+          <p>{{ datos.nombre }}</p>
+          <button @click="enviarLogout" class="btn btn-danger btn-sm">
+              Salir
+              </button>
+        </div>
+
         <div v-else>
           <p>{{ datos.nombre }}</p>
           <button @click="enviarLogout" class="btn btn-danger btn-sm">

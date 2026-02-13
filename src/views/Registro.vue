@@ -9,6 +9,33 @@ const error = ref('');
 
 async function registrarUsuario() {
 
+    //avisamos que los campos no esten vacios
+    if (!form.value.nombre || !form.value.email || !form.value.password) {
+       error.value = "Debe rellenar todos los campos";
+       return;
+   }
+
+   //guardamos el nombre asgurandonos que no tenga espacio por nombres compuestos
+   const caracteresNombre = form.value.nombre.split('');
+   //comprobamos que el usuario no tenga
+    for (let i = 0; i < caracteresNombre.length; i++) {
+        if (caracteresNombre[i] >= '0' && caracteresNombre[i] <= '9') {
+            error.value = "El nombre no puede tener numeros";
+            return;
+        }
+    }
+   // avisamos que el gmail tenga un @
+   if (!form.value.email.includes('@')) {
+       error.value = "Su correo electrónico no es válido";
+       return;
+   }
+
+   //comprobamos que la contraseña tenga un mínimo de 7 caracters
+   if (form.value.password.length < 7) {
+        error.value = "La contraseña debe tener minimo 7 caracteres";
+        return;
+    }
+
    const registroData = {
     nombre: form.value.nombre,
     email: form.value.email,

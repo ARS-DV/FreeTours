@@ -5,29 +5,32 @@ import { rutaApi } from "@/main";
 const arrayRutas = ref([]);
 const idRutaEditar = ref(null);
 
-
+function crearRuta() {
+ router.push('/crearruta')
+  
+}
 function editarRuta(id) {
   idRutaEditar.value = id;
   
 }
 
-async function guardarEdicion(id,rol) {
-const updatedRole = {
-    rol: rol
+async function guardarEdicion(id,guia_id) {
+const updateGuia = {
+    guia_id: guia_id
 };
 fetch(rutaApi+'usuarios?id='+id, {
     method: 'PUT',
     headers: {
         'Content-Type': 'application/json'
     },
-    body: JSON.stringify(updatedRole)
+    body: JSON.stringify(updateGuia)
 })
 .then(response => response.json())
 .then(data => {
   
   console.log('Respuesta:', data)
-  idUsuarioEditado.value = null;
-  listarUsuarios();
+  idRutaEditar.value = null;
+  listarRutas();
   
 }).catch(error => console.error('Error:', error));
 }
@@ -42,6 +45,19 @@ async function listarRutas() {
     })
     .catch((error) => console.error("Error:", error));
 }
+async function eliminarRuta(id) {
+  const rutaId = id;
+
+fetch(rutaApi+`rutas?id=${rutaId}`, {
+    method: 'DELETE',
+})
+.then(response => response.json())
+.then(data => {
+  listarRutas();
+  console.log('Respuesta:', data)})
+.catch(error => console.error('Error:', error));
+}
+
 listarRutas();
 </script>
 
@@ -76,24 +92,24 @@ listarRutas();
         <td>{{ ruta.hora }}</td>
         <td>{{ ruta.latitud }}</td>
         <td>{{ ruta.longitud }}</td>
-        <td>{{ ruta.guia_id }}</td>
+        <td v-if="idRutaEditar !== ruta.id">{{ ruta.guia_id }}</td>
+        <td v-else>
+          <input v-model="ruta.guia_id" class="form-control"></input>
+        </td>
         <td>{{ ruta.guia_nombre }}</td>
         <td>{{ ruta.guia_email }}</td>
         <td>{{ ruta.asistentes }}</td>
-        <td v-if="idRutaEditar !== ruta.id">{{ ruta.rol }}</td>
-        <td v-else>
-          <input v-model="ruta.rol" class="form-control"></input>
-        </td>
 
         <td v-if="idRutaEditar !== ruta.id">
           <button @click.prevent="editarRuta(ruta.id)">Editar</button>
-          <button @click.prevent="eliminarUsuario(ruta.id)">Eliminar</button>
+          <button @click.prevent="eliminarRuta(ruta.id)">Eliminar</button>
         </td>
         <td v-else>
-          <button @click.prevent="guardarEdicion(ruta.id, ruta.rol)">Guardar</button>
-          <button @click.prevent="eliminarUsuario(ruta.id)">Eliminar</button>
+          <button @click.prevent="guardarEdicion(ruta.id, ruta.guia_id)">Guardar</button>
+          <button @click.prevent="eliminarRuta(ruta.id)">Eliminar</button>
         </td>
       </tr>
     </tbody>
   </table>
+  <button @click.prevent="crearRuta">Añadir ruta</button>
 </template>
