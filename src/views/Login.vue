@@ -25,7 +25,7 @@ async function iniciarSesion() {
     contraseña: form.value.password,
 };
 
-//hacemos un fetch a la api
+//hacemos un fetch a la api para buscar al usuario
 fetch(rutaApi+'usuarios?login', {
     method: 'POST',
     headers: {
@@ -39,8 +39,11 @@ fetch(rutaApi+'usuarios?login', {
     if (data.status === 'success') {
         emit('sesionIniciada', data.user);
         console.log('Login exitoso:', data.user);
+        //diferenciamos si es admin,guia o cliente
         if(data.user.rol=="admin"){
             router.push('/homeadmin')
+        }else if(data.user.rol=="guia"){
+            router.push('/homeguia')
         }else{
         router.push('/')
         }

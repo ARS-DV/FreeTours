@@ -4,26 +4,12 @@ import router from "@/router";
 import { rutaApi } from "@/main";
 const arrayUsuarios = ref([]);
 const idUsuarioEditado = ref(null);
-
-
-async function eliminarUsuario(id) {
-fetch(rutaApi+'usuarios?id='+id, {
-    method: 'DELETE',
-    
-})
-.then(response => response.json())
-.then(data => {console.log('Respuesta:', data)
-listarUsuarios()
-})
-.catch(error => console.error('Error:', error));
-}
-
-
+//funcion para obtener el id del usuario a editar
 function editarUsuario(id) {
   idUsuarioEditado.value = id;
   
 }
-
+//funcion para guardar el rol editado
 async function guardarEdicion(id,rol) {
 const updatedRole = {
     rol: rol
@@ -46,7 +32,7 @@ fetch(rutaApi+'usuarios?id='+id, {
 }
 
 
-
+//funcion para listar a los usuarios
 async function listarUsuarios() {
   fetch(rutaApi + "usuarios", {
     method: "GET",
@@ -56,6 +42,19 @@ async function listarUsuarios() {
       ((arrayUsuarios.value = data), console.log("Usuarios:", data));
     })
     .catch((error) => console.error("Error:", error));
+}
+
+//funcion para eliminar a los usuarios
+async function eliminarUsuario(id) {
+fetch(rutaApi+'usuarios?id='+id, {
+    method: 'DELETE',
+    
+})
+.then(response => response.json())
+.then(data => {console.log('Respuesta:', data)
+listarUsuarios()
+})
+.catch(error => console.error('Error:', error));
 }
 listarUsuarios();
 </script>
@@ -78,11 +77,12 @@ listarUsuarios();
         <td>{{ usuario.nombre }}</td>
         <td>{{ usuario.email }}</td>
         <td>{{ usuario.contraseña }}</td>
+        <!-- vif para cambiar a input si se da editar -->
         <td v-if="idUsuarioEditado !== usuario.id">{{ usuario.rol }}</td>
         <td v-else>
           <input v-model="usuario.rol" class="form-control"></input>
         </td>
-
+        <!-- botones de accion -->
         <td v-if="idUsuarioEditado !== usuario.id">
           <button @click.prevent="editarUsuario(usuario.id)">Editar</button>
           <button @click.prevent="eliminarUsuario(usuario.id)">Eliminar</button>

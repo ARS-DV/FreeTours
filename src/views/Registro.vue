@@ -4,7 +4,9 @@ import router from "@/router";
 import {rutaApi} from "@/main";
 
 const emit = defineEmits(["sesionIniciada"]);
+// donde guaradamos la referencias de los datos
 const form = ref({ nombre: '', email: '',password: '' });
+//para guardar los errores
 const error = ref('');
 
 async function registrarUsuario() {
@@ -17,7 +19,7 @@ async function registrarUsuario() {
 
    //guardamos el nombre asgurandonos que no tenga espacio por nombres compuestos
    const caracteresNombre = form.value.nombre.split('');
-   //comprobamos que el usuario no tenga
+   //comprobamos que el usuario no ponga numeros en su nombre
     for (let i = 0; i < caracteresNombre.length; i++) {
         if (caracteresNombre[i] >= '0' && caracteresNombre[i] <= '9') {
             error.value = "El nombre no puede tener numeros";
@@ -36,12 +38,13 @@ async function registrarUsuario() {
         return;
     }
 
+    //variable para guardar los datos del formualrio
    const registroData = {
     nombre: form.value.nombre,
     email: form.value.email,
     contraseña: form.value.password,
 };
-
+//fetch para la ruta de usuarios
 fetch(rutaApi+'usuarios', {
     method: 'POST',
     headers: {
@@ -65,11 +68,11 @@ fetch(rutaApi+'usuarios', {
 <template>
   <form>
     <label>Nombre</label>
-    <input v-model="form.nombre" type="text" />
+    <input v-model="form.nombre" type="text" required/>
     <label>Email</label>
-    <input v-model="form.email" type="text" />
+    <input v-model="form.email" type="text" required/>
     <label>Contraseña</label>
-    <input v-model="form.password" type="password" />
+    <input v-model="form.password" type="password" required/>
     <p v-if="error" class="text-danger mt-2">{{ error }}</p>
     <button @click.prevent="registrarUsuario">Crear cuenta</button>
   </form>
