@@ -26,7 +26,6 @@ function actualizaDatosSesion(usuario){
 
 <template>
   <div class="layout">
-
     <Header :usuario="datosSesion" @sesionCerrada="actualizaDatosSesion" />
     <RouterView @sesionIniciada="actualizaDatosSesion" ></RouterView>
    

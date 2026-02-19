@@ -8,6 +8,7 @@ import CrearRuta from '@/views/CrearRuta.vue'
 import HomeGuia from '@/views/HomeGuia.vue'
 import Reservas from '@/views/Reservas.vue'
 import HomeView from '@/views/HomeView.vue'
+import CiudadView from '@/views/CiudadView.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -56,6 +57,11 @@ const router = createRouter({
       path: '/homeview',
       name: 'homeview',
       component: HomeView,
+    },
+    {
+      path: '/ciudadview',
+      name: 'ciudadview',
+      component: CiudadView,
     },
   ],
 })

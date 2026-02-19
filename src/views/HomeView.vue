@@ -13,13 +13,172 @@ async function listarRutas() {
     })
     .catch((error) => console.error("Error:", error));
 }
-
 listarRutas();
+
+
+function accionPlay() {
+  if (!medio.paused && !medio.ended) {
+    medio.pause();
+    play.value = "\u25BA"; //\u25BA
+  } else {
+    medio.play();
+    play.value = "||";
+  }
+}
+function accionReiniciar() {
+  //Usar propiedad .currentTime
+  medio.currentTime = 0;
+  //Reproducir el vídeo
+  medio.play();
+  //Cambiar el valor del botón a ||
+  play.value = "||";
+}
+function accionRetrasar() {
+  //Usar propiedad .curentTime
+  //Contemplar que no existen valores negativos
+  if (medio.duration <= 5) {
+    medio.currentTime = 0;
+  } else {
+    medio.currentTime -= 5;
+  }
+}
+function accionAdelantar() {
+  //Contemplar que no existen valores mayores a medio.duration
+  if (medio.currentTime <= medio.duration) {
+    medio.currentTime += 5;
+  } else {
+    medio.currentTime = medio.duration;
+  }
+}
+function accionSilenciar() {
+  if (medio.muted == false) {
+    medio.muted = true;
+    silenciar.value = "escuchar";
+  } else {
+    medio.muted = false;
+    silenciar.value = "silenciar";
+  }
+  //Utilizar medio.muted = true; o medio.muted = false;
+}
+function accionMasVolumen() {
+  if (medio.volume <= 1) {
+    medio.volume += 0.1;
+  }
+  //Contemplar que el valor máximo de volumen es 1
+}
+function accionMenosVolumen() {
+  //Contemplar que el valor mínimo de volumen es 0
+  if (medio.volume <= 1 && medio.volume >= 0) {
+    medio.volume -= 0.1;
+  }
+}
+
+function iniciar() {
+  medio = document.getElementById("medio");
+  play = document.getElementById("play");
+  reiniciar = document.getElementById("reiniciar");
+  retrasar = document.getElementById("retrasar");
+  adelantar = document.getElementById("adelantar");
+  silenciar = document.getElementById("silenciar");
+
+  play.addEventListener("click", accionPlay);
+  reiniciar.addEventListener("click", accionReiniciar);
+  retrasar.addEventListener("click", accionRetrasar);
+  adelantar.addEventListener("click", accionAdelantar);
+  silenciar.addEventListener("click", accionSilenciar);
+  menosVolumen.addEventListener("click", accionMenosVolumen);
+  masVolumen.addEventListener("click", accionMasVolumen);
+  }
+
+window.addEventListener("load", iniciar, false);
+
+
+// Call carousel manually
+$('#myCarouselCustom').carousel();
+
+// Go to the previous item
+$("#prevBtn").click(function(){
+    $("#myCarouselCustom").carousel("prev");
+});
+// Go to the previous item
+$("#nextBtn").click(function(){
+    $("#myCarouselCustom").carousel("next");
+});
+
 </script>
 
 <template>
 
- 
+  <div id="myCarouselCustom" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarouselCustom" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarouselCustom" data-slide-to="1"></li>
+        <li data-target="#myCarouselCustom" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+        <div class="item active">
+            <img src="#" alt="">
+            <div class="carousel-caption">
+                <h3>First Slide</h3>
+                <p>This is the first image slide</p>
+            </div>
+        </div>
+  
+        <div class="item">
+            <img src="#" alt="">
+            <div class="carousel-caption">
+                <h3>Second Slide</h3>
+                <p>This is the second image slide</p>
+            </div>
+        </div>
+        
+        <div class="item">
+            <img src="#" alt="">
+            <div class="carousel-caption">
+                <h3>Third Slide</h3>
+                <p>This is the third image slide</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+<!-- Custom Controls -->
+<a href="javascript:void(0);" id="prevBtn">Prev Slide</a>
+<a href="javascript:void(0);" id="nextBtn">Next Slide</a>
+
+
+
+
+<!-- VIDEO -->
+  <section class="video">
+    <h3>Recomendaciones de nuestro canal</h3>
+            <video id="medio" width="720" height="400">
+      <source :src="'homeVideo.mp4'" type="video/mp4" />
+     <source :src="'homeVideo.ogg'" type="video/ogg" />
+    </video>
+    <nav>
+      <input type="button" id="reiniciar" value="reiniciar" />
+      <input type="button" id="retrasar" value="&laquo;" />
+      <input type="button" id="play" value="&#9658;" />
+      <input type="button" id="adelantar" value="&raquo;" />
+      <input type="button" id="silenciar" value="silenciar" />
+      <label>Volumen</label>
+      <input type="button" id="menosVolumen" value="-" />
+      <input type="button" id="masVolumen" value="+" />
+    </nav>
+        </section>
 
 
   <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -69,6 +228,12 @@ listarRutas();
 </template>
 
 <style scoped>
+.main-video {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+}
 .accordion-button:not(.collapsed) {
     color: #1E272E; 
     background-color: transparent; 

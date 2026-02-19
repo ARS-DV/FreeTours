@@ -54,7 +54,7 @@ listarRutasAsignadas();
             data-mdb-modal-init
             data-mdb-target="#staticBackdrop2"
           >
-            Pasar lista
+            <i class="bi bi-people"></i> Pasar lista
           </button>
         </td>
       </tr>

@@ -58,7 +58,7 @@ function enviarLogout() {
           <p class="fw-bold text-dark">Hola, {{ datos.nombre }}</p>
           
           <button @click="enviarLogout" class="btn btn-danger btn-sm fw-bold">
-            Salir
+            Salir <i class="bi bi-box-arrow-right"></i>
           </button>
         </div>
 
