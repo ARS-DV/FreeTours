@@ -57,12 +57,28 @@ fetch(rutaApi+'usuarios?login', {
   
 </script>
 <template>
+    <div class="formu">
     <form> 
+        <div class="form-row">
+            <div class="form-group">
         <label>Usuario</label>
         <input v-model="form.usuario" type="text" />
+        </div>
+        <div class="form-group">
         <label>Contraseña</label>
         <input v-model="form.password"  type="password" />
+        </div>
         <p v-if="error" class="text-danger mt-2">{{ error }}</p>
+
         <button @click.prevent="iniciarSesion">Iniciar sesión</button> 
-    </form>
+   </div>
+   </form>
+   </div>
 </template>
+
+<style scoped>
+.formu{
+    height: 25%;
+    background-color: #FF8C42;
+}
+</style>
