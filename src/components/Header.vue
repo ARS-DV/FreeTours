@@ -18,7 +18,7 @@ function Logout() {
 <template>
   <header class="header">
     <div class="brand-container">
-      <RouterLink to="/homeview" class="logo-link">
+      <RouterLink to="/" class="logo-link">
         <img src="@/assets/logo.png" alt="FreeTours Logo" class="header-logo">
         <h1 class="header-title">FreeTours </h1>
       </RouterLink>
@@ -37,6 +37,7 @@ function Logout() {
   justify-content: space-between; 
   align-items: center; 
   padding: 0 2rem; 
+  z-index: 1050;
 }
 
 

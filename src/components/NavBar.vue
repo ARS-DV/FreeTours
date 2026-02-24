@@ -22,9 +22,7 @@ function enviarLogout() {
         <li class="nav-item">
           <RouterLink to="/rutas" class="nav-link custom-link">Rutas</RouterLink>
         </li>
-        <li class="nav-item">
-          <RouterLink to="/reservas" class="nav-link custom-link">Reservas</RouterLink>
-        </li>
+        
 
         <template v-if="datos && datos.rol == 'admin'">
           <li class="nav-item">
@@ -37,7 +35,16 @@ function enviarLogout() {
 
         <template v-if="datos && datos.rol == 'guia'">
           <li class="nav-item">
-            <RouterLink to="/homeguia" class="nav-link custom-link">Mis Rutas</RouterLink>
+            <RouterLink to="/asignaciones" class="nav-link custom-link">Mis Rutas</RouterLink>
+          </li>
+        </template>
+
+        <template v-if="datos && datos.rol == 'cliente'">
+          <li class="nav-item">
+            <RouterLink to="/reservas" class="nav-link custom-link">Reservas</RouterLink>
+          </li>
+          <li class="nav-item">
+            <RouterLink to="/misreservas" class="nav-link custom-link">Antiguas reservas</RouterLink>
           </li>
         </template>
       </ul>

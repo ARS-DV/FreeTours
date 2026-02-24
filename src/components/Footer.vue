@@ -1,64 +1,56 @@
-<script>
-  import { MDBFooter, MDBContainer, MDBRow, MDBCol, MDBIcon, mdbRipple } from 'mdb-vue-ui-kit';
-
-  export default {
-    components: {
-      MDBFooter,
-      MDBContainer,
-      MDBRow,
-      MDBCol,
-      MDBIcon
-    },
-    directives: {
-      mdbRipple
-    }
-  };
-</script>
 <template>
-  <MDBFooter text="center">
-      <!-- Grid container -->
-      <MDBContainer class="pt-4">
-        <!-- Section: Social media -->
-        <section class="mb-4">
-          <!-- Facebook -->
-          <a
-            class="btn btn-link btn-floating btn-lg text-body m-1"
-            href="#!"
-            role="button"
-            v-mdb-ripple="{ color: 'dark' }"
-            ><MDBIcon iconStyle="fab" icon="facebook-f"></MDBIcon
-          ></a>
-          <!-- Twitter -->
-          <a
-            class="btn btn-link btn-floating btn-lg text-body m-1"
-            href="#!"
-            role="button"
-            v-mdb-ripple="{ color: 'dark' }"
-            ><MDBIcon iconStyle="fab" icon="twitter"></MDBIcon
-          ></a>
-          <!-- Instagram -->
-          <a
-            class="btn btn-link btn-floating btn-lg text-body m-1"
-            href="#!"
-            role="button"
-            v-mdb-ripple="{ color: 'dark' }"
-            ><MDBIcon iconStyle="fab" icon="instagram"></MDBIcon
-          ></a>
-        </section>
-        <!-- Section: Social media -->
-      </MDBContainer>
-      <!-- Grid container -->
-      <!-- Copyright -->
+  <footer class="fondo-footer border-top py-4 mt-auto">
+    <div
+      class="container d-flex flex-column flex-md-row justify-content-between align-items-center"
+    >
       <div
-        class="text-center text-body p-3"
-        style="background-color: rgba(0, 0, 0, 0.05)"
+        class="d-flex gap-4 mb-3 mb-md-0"
+        role="navigation"
+        aria-label="Redes sociales"
       >
-        © 2020 Copyright:
-        <a class="text-body" href="https://mdbootstrap.com/"
-          >MDBootstrap.com</a
+        <a
+          href="#"
+          class="icono-naranja"
+          aria-label="Síguenos en Facebook"
         >
+          <i class="bi bi-facebook fs-4"></i>
+        </a>
+
+        <a
+          href="#"
+          class="icono-naranja"
+          aria-label="Síguenos en Instagram"
+        >
+          <i class="bi bi-instagram fs-4"></i>
+        </a>
+
+        <a
+          href="#"
+          class="icono-naranja"
+          aria-label="Síguenos en X (Twitter)"
+        >
+          <i class="bi bi-twitter-x fs-4"></i>
+        </a>
       </div>
-      <!-- Copyright -->
-    </MDBFooter>
-  </template>
-  
+
+      <div fw-medium text-center text-md-end>
+        &copy; 2025 Free Tours. Todos los derechos reservados.
+      </div>
+    </div>
+  </footer>
+</template>
+
+<style scoped>
+.fondo-footer {
+  background-color: #00a8b5;
+}
+.icono-naranja {
+  color: white; 
+}
+
+.icono-naranja:hover {
+  color: #ff8c42;
+  transform: translateY(-3px);
+}
+
+</style>
